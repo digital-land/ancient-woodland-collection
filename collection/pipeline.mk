@@ -1,0 +1,13 @@
+ANCIENT_WOODLAND_DATASET=$(DATASET_DIR)ancient-woodland.csv
+ANCIENT_WOODLAND_TRANSFORMED_FILES=\
+    $(TRANSFORMED_DIR)ancient-woodland/89632d544d34d2745cbfc2ec034fbdae2a74c235ea07acd67d920c4cebddc3c0.csv
+
+$(TRANSFORMED_DIR)ancient-woodland/89632d544d34d2745cbfc2ec034fbdae2a74c235ea07acd67d920c4cebddc3c0.csv: collection/resource/89632d544d34d2745cbfc2ec034fbdae2a74c235ea07acd67d920c4cebddc3c0
+	$(run-pipeline)
+
+$(ANCIENT_WOODLAND_DATASET): $(ANCIENT_WOODLAND_TRANSFORMED_FILES)
+	$(build-dataset)
+
+transformed:: $(ANCIENT_WOODLAND_TRANSFORMED_FILES)
+
+dataset:: $(ANCIENT_WOODLAND_DATASET)
