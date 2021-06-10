@@ -94,12 +94,24 @@ clean::
 # local copies of the organisation dataset needed by harmonise
 init::
 	@mkdir -p $(CACHE_DIR)
-	curl -qs "https://raw.githubusercontent.com/digital-land/organisation-dataset/main/collection/organisation.csv" > $(CACHE_DIR)organisation.csv
+	curl -qfs "https://raw.githubusercontent.com/digital-land/organisation-dataset/main/collection/organisation.csv" > $(CACHE_DIR)organisation.csv
 
 makerules::
-	curl -qsL '$(SOURCE_URL)/makerules/main/pipeline.mk' > makerules/pipeline.mk
+	curl -qfsL '$(SOURCE_URL)/makerules/main/pipeline.mk' > makerules/pipeline.mk
 
 commit-dataset::
 	mkdir -p $(DATASET_DIRS)
 	git add $(DATASET_DIRS)
 	git diff --quiet && git diff --staged --quiet || (git commit -m "Data $(shell date +%F)"; git push origin $(BRANCH))
+
+fetch-s3::
+	aws s3 sync s3://collection-dataset/$(REPOSITORY)/$(RESOURCE_DIR) $(RESOURCE_DIR)
+	aws s3 sync s3://collection-dataset/$(REPOSITORY)/$(ISSUE_DIR) $(ISSUE_DIR)
+	aws s3 sync s3://collection-dataset/$(REPOSITORY)/$(TRANSFORMED_DIR) $(TRANSFORMED_DIR)
+	aws s3 sync s3://collection-dataset/$(REPOSITORY)/$(DATASET_DIR) $(DATASET_DIR)
+
+push-s3::
+	aws s3 sync $(RESOURCE_DIR) s3://collection-dataset/$(REPOSITORY)/$(RESOURCE_DIR)
+	aws s3 sync $(TRANSFORMED_DIR) s3://collection-dataset/$(REPOSITORY)/$(TRANSFORMED_DIR)
+	aws s3 sync $(ISSUE_DIR) s3://collection-dataset/$(REPOSITORY)/$(ISSUE_DIR)
+	aws s3 sync $(DATASET_DIR) s3://collection-dataset/$(REPOSITORY)/$(DATASET_DIR)

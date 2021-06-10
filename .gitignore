@@ -21,3 +21,9 @@ specification/
 
 # ignore src/
 src/
+
+# stored in S3
+collection/resource/
+dataset/
+transformed/
+issue/
