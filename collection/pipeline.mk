@@ -1,6 +1,10 @@
 ANCIENT_WOODLAND_DATASET=$(DATASET_DIR)ancient-woodland.csv
 ANCIENT_WOODLAND_TRANSFORMED_FILES=\
+    $(TRANSFORMED_DIR)ancient-woodland/87a4898736b177e886dc0722c3403b12989a563c272a6c55a70be1e4a307f94c.csv\
     $(TRANSFORMED_DIR)ancient-woodland/89632d544d34d2745cbfc2ec034fbdae2a74c235ea07acd67d920c4cebddc3c0.csv
+
+$(TRANSFORMED_DIR)ancient-woodland/87a4898736b177e886dc0722c3403b12989a563c272a6c55a70be1e4a307f94c.csv: collection/resource/87a4898736b177e886dc0722c3403b12989a563c272a6c55a70be1e4a307f94c
+	$(run-pipeline)
 
 $(TRANSFORMED_DIR)ancient-woodland/89632d544d34d2745cbfc2ec034fbdae2a74c235ea07acd67d920c4cebddc3c0.csv: collection/resource/89632d544d34d2745cbfc2ec034fbdae2a74c235ea07acd67d920c4cebddc3c0
 	$(run-pipeline)
