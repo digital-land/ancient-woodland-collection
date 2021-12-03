@@ -29,6 +29,7 @@ for directory in glob("transformed/*"):
     dataset = Path(directory).name
     for path in glob(directory + "/*.csv"):
         for row in csv.DictReader(open(path)):
+            row.setdefault("organisation", "")
             row["pipeline"] = dataset
             row["value"] = row[dataset]
             lookup[key(row)] = row
@@ -40,6 +41,7 @@ w.writeheader()
 for key, row in lookup.items():
     if not row["value"]:
         next
+
     if not  row.get("entity", ""):
         dataset = row["pipeline"]
         row["entity"] = entity[dataset]
