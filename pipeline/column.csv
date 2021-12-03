@@ -1,4 +1,5 @@
 pipeline,resource,pattern,value
 ancient-woodland,,NAME,name
-ancient-woodland,,THEMID,geography
+ancient-woodland,,THEMID,ancient-woodland
+ancient-woodland,,STATUS,ancient-woodland-status
 ancient-woodland,,WKT,geometry
