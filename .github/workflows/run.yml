@@ -1,7 +1,7 @@
 name: Run pipeline
 on:
   schedule:
-  - cron: 0 0 1 * *
+  - cron: 0 0 * * 0
   workflow_dispatch: null
 env:
   DLB_BOT_EMAIL: ${{ secrets.DLB_BOT_EMAIL }}
