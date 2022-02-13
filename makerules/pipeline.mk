@@ -39,6 +39,10 @@ ifeq ($(ISSUE_DIR),)
 ISSUE_DIR=issue/
 endif
 
+ifeq ($(COLUMN_FIELD_DIR),)
+COLUMN_FIELD_DIR=var/column-field/
+endif
+
 ifeq ($(DATASET_DIR),)
 DATASET_DIR=dataset/
 endif
@@ -52,14 +56,14 @@ DATASET_DIRS=\
 endif
 
 define run-pipeline =
-	mkdir -p $(@D) $(ISSUE_DIR)$(notdir $(@D))
-	digital-land --pipeline-name $(notdir $(@D)) $(DIGITAL_LAND_FLAGS) pipeline --issue-dir $(ISSUE_DIR)$(notdir $(@D)) $(PIPELINE_FLAGS) $< $@
+	mkdir -p $(@D) $(ISSUE_DIR)$(notdir $(@D)) $(COLUMN_FIELD_DIR)$(notdir $(@D))
+	digital-land --dataset $(notdir $(@D)) $(DIGITAL_LAND_FLAGS) pipeline --issue-dir $(ISSUE_DIR)$(notdir $(@D)) --column-field-dir $(COLUMN_FIELD_DIR)$(notdir $(@D)) $(PIPELINE_FLAGS) $< $@
 endef
 
 define build-dataset =
 	mkdir -p $(@D)
-	time digital-land --pipeline-name $(notdir $(basename $@)) dataset-create --output-path $(basename $@).sqlite3 $(^)
-	time digital-land --pipeline-name $(notdir $(basename $@)) dataset-entries $(basename $@).sqlite3 $@
+	time digital-land --dataset $(notdir $(basename $@)) dataset-create --output-path $(basename $@).sqlite3 $(^)
+	time digital-land --dataset $(notdir $(basename $@)) dataset-entries $(basename $@).sqlite3 $@
 	md5sum $@ $(basename $@).sqlite3
 endef
 
