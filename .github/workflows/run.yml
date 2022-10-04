@@ -76,3 +76,7 @@ jobs:
 
     - name: Save datasets to S3
       run: make save-dataset
+
+    - name: Save expectations to S3
+      if: always()
+      run: make save-expectations
