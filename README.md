@@ -1,4 +1,4 @@
-# ancient-woodland-collection collection
+# ancient-woodland-collection collection ⚠️ Centralised
 
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/digital-land/ancient-woodland-collection/blob/main/LICENSE)
 [![Run pipeline](https://github.com/digital-land/ancient-woodland-collection/actions/workflows/run.yml/badge.svg)](https://github.com/digital-land/ancient-woodland-collection/actions/workflows/run.yml)
